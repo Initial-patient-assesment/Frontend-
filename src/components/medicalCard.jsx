@@ -1,7 +1,7 @@
 import p from '../photos/krest.png';
 import React, { useEffect, useState } from 'react';
 import './book.css'; 
-//import '../App.css';
+import '../App.css';
 const FlipBook = () => {
   const [currentPagePosition, setCurrentPagePosition] = useState(0);
   const leaves = document.querySelectorAll('.leaf');
