@@ -6,33 +6,39 @@ import { FaBriefcaseMedical } from "react-icons/fa";
 import { FaMessage } from "react-icons/fa6";
 import { FaBell } from "react-icons/fa";
 import { RxAvatar } from "react-icons/rx";
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import photo2 from '../photos/hh.jpg'
 import photo3 from '../photos/doctors.jpg'
 import photo4 from "../photos/chat.png"
+import axios from 'axios';
 
 const Main = () =>{
- /*  const [userName, setUserName] = useState(''); */ // - ТУТ ХРАНИТСЯ ИМЯ, КОТОРОЕ ТЫ ВЫТАЩИШЬ С БЭКА
+  const [userName, setUserName] = useState(""); 
+    const [link, setLink] = useState("http://localhost:3000/"); 
+    const [linkName, setLinkName] = useState("Log in"); 
+    const [selectedImage, setSelectedImage] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleClick = (index) => {
     setActiveIndex(index); // обновляем состояние при клике на элемент меню
   };
 
-/*   useEffect(() => {
+   useEffect(() => {
     const fetchUserData = async () => {
       const token = localStorage.getItem('token');
       if (token) {
         try {
-          const response = await axios.get('http://localhost:1111/user', { headers: { Authorization: `Bearer ${token}` } });
-          setUserName(response.data.name);
+            const response = await axios.post('https://backend-3-4sig.onrender.com/get_user', { 'token': token });
+            setUserName(response.data.name);
+            setLink("")
+            setLinkName("")
         } catch (error) {
           console.error('Ошибка при получении данных пользователя', error);
         }
       }
     };
     fetchUserData();
-  }, []); */
+  }, []); 
 
     return (
         <>
@@ -227,7 +233,9 @@ Hello! You can take a short test to make a quick appointment with a doctor!
               <FaMessage className = "IconL" />
               <FaBell className = "IconR"/>
             </div>
-            <div className = "Name">Alexandr {/* {userName} */} </div>
+                                <div className="Name">{userName} <a href={link}> {linkName}</a></div>
+
+                                
             <div className = "avatar"> <RxAvatar />  </div>
           </div>
 
